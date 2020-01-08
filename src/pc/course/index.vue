@@ -130,7 +130,6 @@ export default {
       };
       this.$api.post(API.courseList, data).then(res => {
         if (res.code === 200) {
-          console.log(res.data);
           this.videoList = res.data.splice(0, 12);
           this.hotList = res.data.splice(0, 4);
         }

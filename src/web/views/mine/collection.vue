@@ -21,7 +21,7 @@
       <ul class="list" v-else>
         <li class="item" v-for="item in collectionList" :key="item.courseId">
           <div class="left">
-            <img :src="item.courseImage" alt="">
+            <img :src="item.courseImage" alt />
           </div>
           <div class="right">
             <p class="title">{{item.courseName}}</p>
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-import {List as API} from '@/assets/api/api'
+import { List as API } from "@/assets/api/api";
 import Headers from "./header";
 export default {
   data() {
@@ -68,30 +68,29 @@ export default {
   methods: {
     _change_(id) {
       this.classId = id;
-      this._get_Data_(this.classId)
+      this._get_Data_(this.classId);
     },
     _get_Data_(type) {
       let data = {
         type
-      }
+      };
       this.$api.post(API.collectionList, data).then(res => {
-        console.log(res)
         if (res.code === 200) {
-          this.collectionList = res.data
+          this.collectionList = res.data;
           if (this.collectionList.length > 0) {
-            this.show  = false
+            this.show = false;
           } else {
-            this.show = true
+            this.show = true;
           }
         }
-      })
+      });
     }
   },
   components: {
     "v-header": Headers
   },
   created() {
-    this._get_Data_(3)
+    this._get_Data_(3);
   }
 };
 </script>
@@ -128,10 +127,10 @@ export default {
       width: 100%;
       padding-top: 90px;
       text-align: center;
-      background: #F5F5F5;
+      background: #f5f5f5;
       line-height: 20px;
       font-size: 14px;
-      color: #4A4A4A;
+      color: #4a4a4a;
       font-weight: 400;
       display: flex;
       justify-content: center;
@@ -150,12 +149,12 @@ export default {
     .item {
       display: flex;
       padding: 12px;
-      border-bottom: 1px solid #F5F5F5;
+      border-bottom: 1px solid #f5f5f5;
       .left {
         width: 110px;
         height: 70px;
         border-radius: 1px;
-        background: #F5F5F5;
+        background: #f5f5f5;
         > img {
           width: 100%;
           height: 100%;
@@ -170,7 +169,7 @@ export default {
           text-align: left;
           font-family: PingFangSC-Regular;
           font-weight: 400;
-          color: rgba(51,51,51,1);
+          color: rgba(51, 51, 51, 1);
           line-height: 21px;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -180,7 +179,7 @@ export default {
           justify-content: space-between;
           padding-top: 6px;
           .icon {
-            color: #EE762E;
+            color: #ee762e;
             font-size: 16px;
           }
           .left-box {
@@ -190,7 +189,7 @@ export default {
               font-size: 12px;
               font-family: PingFangSC-Regular;
               font-weight: 600;
-              color: rgba(153,153,153,1);
+              color: rgba(153, 153, 153, 1);
               line-height: 17px;
             }
           }

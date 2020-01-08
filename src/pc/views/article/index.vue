@@ -265,7 +265,6 @@ export default {
       this.$api.post(API.article, data).then(res => {
         if (res.code === 200) {
           this.body = res.data;
-          console.log(this.body);
         }
       });
     }

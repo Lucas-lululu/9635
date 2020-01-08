@@ -312,9 +312,7 @@ export default {
         page,
         pageSize
       };
-      this.$api.post(API.list, data).then(res => {
-        console.log(res);
-      });
+      this.$api.post(API.list, data).then(res => {});
     }
   },
   components: {

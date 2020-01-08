@@ -25,8 +25,8 @@ export default {
       oneList: [],
       twoList: [],
       rank: [],
-      news: [],
-      screenWidth: document.body.clientWidth
+      news: []
+      // screenWidth: document.body.clientWidth
     };
   },
   components: {
@@ -56,24 +56,24 @@ export default {
     }
   },
   mounted() {
-    window.onresize = () => {
-      return (() => {
-          window.screenWidth = document.body.clientWidth
-          this.screenWidth = window.screenWidth
-      })()
-    }
+    // window.onresize = () => {
+    //   return (() => {
+    //       window.screenWidth = document.body.clientWidth
+    //       this.screenWidth = window.screenWidth
+    //   })()
+    // }
   },
-  watch: {
-    screenWidth(v) {
-      if (v <= 500) {
-        this.$router.push('/web/index')
-      } else {
-        this.$router.push('/pc/index')
-      }
-    }
-  },
+  // watch: {
+  //   screenWidth(v) {
+  //     if (v <= 500) {
+  //       this.$router.push('/web/index')
+  //     } else {
+  //       this.$router.push('/pc/index')
+  //     }
+  //   }
+  // },
   created() {
-    this._get_Home_page_()
+    this._get_Home_page_();
   }
 };
 </script>

@@ -54,9 +54,7 @@ export default {
       let data = {
         phoneNumber: Base64.encode(num)
       };
-      this.$api.post(API.sendCode, data).then(res => {
-        console.log(res);
-      });
+      this.$api.post(API.sendCode, data).then(res => {});
     },
     _go_login_() {
       this.$router.push("/login/index");

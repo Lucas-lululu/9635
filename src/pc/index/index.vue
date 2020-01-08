@@ -833,27 +833,27 @@ export default {
       twoList: [],
       rank: [],
       news: [],
-      screenWidth: document.body.clientWidth,
+      // screenWidth: document.body.clientWidth,
       classId: 1
     };
   },
-  mounted() {
-    window.onresize = () => {
-      return (() => {
-        window.screenWidth = document.body.clientWidth;
-        this.screenWidth = window.screenWidth;
-      })();
-    };
-  },
-  watch: {
-    screenWidth(v) {
-      if (v <= 500) {
-        this.$router.push("/web/index");
-      } else {
-        this.$router.push("/pc/index");
-      }
-    }
-  },
+  // mounted() {
+  //   window.onresize = () => {
+  //     return (() => {
+  //       window.screenWidth = document.body.clientWidth;
+  //       this.screenWidth = window.screenWidth;
+  //     })();
+  //   };
+  // },
+  // watch: {
+  //   screenWidth(v) {
+  //     if (v <= 500) {
+  //       this.$router.push("/web/index");
+  //     } else {
+  //       this.$router.push("/pc/index");
+  //     }
+  //   }
+  // },
   methods: {
     _router_go_(path) {
       this.$router.push(path);
