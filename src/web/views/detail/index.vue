@@ -81,7 +81,7 @@
               class="video"
               v-for="(item,index) in videoList"
               :key="index"
-              @click="_go_video_(item.articleId,item.userId)"
+              @click="_go_video_(item.id,item.user.userId)"
             >
               <img class="img" :src="item.videoImage" alt />
               <div>
@@ -101,7 +101,7 @@
               class="article"
               v-for="(item,index) in informationList"
               :key="index"
-              @click="_go_detail_(item.articleId)"
+              @click="_go_detail_(item.id)"
               :class="item.articleImg.length > 1 ? 'active' : ''"
             >
               <div class="author-info">
@@ -135,7 +135,7 @@
         </div>
         <div v-if="aId === 3" class="tabs">
           <ul class="lists">
-            <li class="course" v-for="(item,index) in coursesList" :key="index">
+            <li class="course" v-for="(item,index) in coursesList" :key="index" @click="_go_course_(item)">
               <div class="img">
                 <img :src="item.courseImage" alt />
               </div>
@@ -247,6 +247,11 @@ export default {
       this.$router.push(`/web/video/detail?videoId=${id}&teacherId=${name}`);
       this.$emit("video", 1);
     },
+    _go_course_(obj) {
+      // console.log(obj)
+      this.$router.push(`/web/course/detail?courseId=${obj.courseId
+      }`)
+    },
     _change_(id) {
       this.aId = id;
     },
@@ -256,9 +261,9 @@ export default {
         lastId: 0,
         teacherId: this.$route.query.teacherId
       };
-      this.$api.post(API.courses, data).then(res => {
-        if (res.code === 200) {
-          this.coursesList = res.data;
+      this._netGet(API.courses, data).then(res => {
+        if (res.code === 0) {
+          this.coursesList = res.data.list;
         }
       });
     },
@@ -269,9 +274,10 @@ export default {
         teacherId: this.$route.query.teacherId,
         type: 0
       };
-      this.$api.post(API.Information, data).then(res => {
-        if (res.code === 200) {
-          this.informationList = res.data;
+      let params = this.JsonToGetParams(data)
+      this.$api.get(API.Information+'?'+params).then(res => {
+        if (res.code === 0) {
+          this.informationList = res.data.list;
         }
       });
     },
@@ -281,9 +287,9 @@ export default {
         lastId: 0,
         teacherId: this.$route.query.teacherId
       };
-      this.$api.post(API.video, data).then(res => {
-        if (res.code === 200) {
-          this.videoList = res.data;
+      this._netGet(API.video, data).then(res => {
+        if (res.code === 0) {
+          this.videoList = res.data.list;
         }
       });
     },
@@ -291,7 +297,7 @@ export default {
       let data = {
         roomId: this.$route.query.teacherId
       };
-      this.$api.post(API.detail, data).then(res => {
+      this._netGet(API.detail, data).then(res => {
         if (res.code === 200) {
         }
       });
@@ -300,8 +306,20 @@ export default {
       let data = {
         teacherId: this.$route.query.teacherId
       };
-      this.$api.post(API.info, data).then(res => {
-        if (res.code === 200) {
+
+      const str = [];
+      for (let p in data) {
+        str.push(
+                encodeURIComponent(p) + '=' + encodeURIComponent(data[p]),
+        );
+      }
+      let body = null;
+      if (str.length > 0) {
+        body = str.join('&');
+      }
+
+      this.$api.get(API.info+'?' +body).then(res => {
+        if (res.code === 0) {
           this.data = res.data;
           this.nikeName = this.data.user.nikeName;
           this.avatar = this.data.user.avatarUrl;
@@ -311,8 +329,21 @@ export default {
         }
       });
     },
+    _netGet(url, data){
+      const str = [];
+      for (let p in data) {
+        str.push(
+                encodeURIComponent(p) + '=' + encodeURIComponent(data[p]),
+        );
+      }
+      let body = null;
+      if (str.length > 0) {
+        body = str.join('&');
+      }
+      return this.$api.get(url+'?' +body);
+    },
     _return_() {
-      this.$router.push("/index");
+      this.$router.push("/web/index");
       this.$emit("detail", 1);
     }
   },

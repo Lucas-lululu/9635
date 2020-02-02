@@ -11,10 +11,9 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(
   config => {
-    if (Vue.cookie.get('authorization')) {
-      config.headers['authorization'] = Vue.cookie.get('authorization')
+    if (Vue.cookie.get('token')) {
+      config.headers['token'] = Vue.cookie.get('token')
     }
-    config.headers['authorization'] = 'c030965a77fa4cc0bcb0fbda05935287'
     return config
   },
   error => {

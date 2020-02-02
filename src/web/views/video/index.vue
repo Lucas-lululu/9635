@@ -49,8 +49,8 @@ export default {
     _change_video_(obj) {
       let url = window.location.href;
       url = url.split("?")[0];
-      window.location.href = `${url}?videoId=${obj.articleId}&teacherId=${
-        obj.userId
+      window.location.href = `${url}?videoId=${obj.id}&teacherId=${
+        obj.user.userId
       }`;
     },
     _getVideo_Detail_() {
@@ -59,19 +59,19 @@ export default {
         teacherId: this.$route.query.teacherId
       };
       this.$api.post(API.video, data).then(res => {
-        if (res.code === 200) {
-          for (let key in res.data) {
-            if (res.data[key].articleId == this.$route.query.videoId) {
-              this.url = res.data[key].videoUrl;
+        if (res.code === 0) {
+          for (let key in res.data.list) {
+            if (res.data.list[key].id == this.$route.query.videoId) {
+              this.url = res.data.list[key].videoUrl;
               let url = this.url;
               url = url.split(".");
               this.type = url[url.length - 1];
-              this.title = res.data[key].title;
-              this.watch = res.data[key].watchCount;
-              this.date = res.data[key].time;
+              this.title = res.data.list[key].title;
+              this.watch = res.data.list[key].watchCount;
+              this.date = res.data.list[key].time;
             }
           }
-          this.list = res.data;
+          this.list = res.data.list;
         }
       });
     }

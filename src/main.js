@@ -16,6 +16,7 @@ import Vuecookie from 'vue-cookie'
 import API from './assets/api/request'
 import './assets/iconfont/iconfont.css'
 import * as filters from './filters'
+import ParamsHandler from "./mixins/ParamsHandler";
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 Vue.use(Vuecookie)
@@ -29,7 +30,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.prototype.$api = API
-
+Vue.mixin(ParamsHandler)
 new Vue({
   router,
   store,

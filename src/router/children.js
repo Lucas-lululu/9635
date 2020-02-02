@@ -128,6 +128,11 @@ export const web = [{
       path: 'article/detail',
       name: 'webarticleDetail',
       component: () => import('@/web/views/article/detail')
+    },
+    {
+      path: 'course/detail',
+      name: 'courseDetail',
+      component: () => import('@/web/views/courseDetail')
     }
   ]
 }]

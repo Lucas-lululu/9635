@@ -75,6 +75,9 @@ export default {
     };
   },
   methods: {
+    _go_login(){
+      this.$router.push("/web/login/phone_login");
+    },
     _go_(obj) {
       if (obj.to) {
         if (obj.to !== 'out') {
@@ -94,9 +97,13 @@ export default {
       let data = {
         deviceType: "h5"
       };
-      this.$api.post(API.info, data).then(res => {
-        this.name = res.data.nikeName;
-        this.img = res.data.avatarUrl;
+      this._netGet(API.info, data).then(res => {
+        if (res.code == 100005002){
+          this._go_login();
+          return;
+        }
+        this.name = res.data.nickName;
+        this.img = res.data.avatarUrl||'http://oss.astevencui.com/upload/20200130/ee64698980bb4bcb825d99b18fad642d.png';
         this.$cookie.set('infoObj', JSON.stringify(res.data))
         this.$cookie.set('userId', res.data.userId)
       });
@@ -106,8 +113,8 @@ export default {
     "v-footer": FooterMenu
   },
   created() {
-    if (!this.$cookie.get("authorization")) {
-      this.$router.push("/login/phone_login");
+    if (!this.$cookie.get("token")) {
+      this.$router.push("/web/login/phone_login");
     } else {
       this._getInfo_();
     }

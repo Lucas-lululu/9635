@@ -9,7 +9,7 @@
       >{{item.name}}</a>
     </div>
     <ul class="lists">
-      <li class="li" v-for="item in list" :key="item.userId">
+      <li @click="_go_teacher_detail_(item.userId)" class="li" v-for="item in list" :key="item.userId">
         <div class="avatar">
           <a>
             <img :src="item.avatarUrl" alt />
@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     _go_() {
-      this.$router.push("/web/teacher/index");
+      this.$router.push("/web/teacher");
     },
     _changeClass_(id) {
       if (id === undefined) {

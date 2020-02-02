@@ -19,14 +19,15 @@
         <li>
           <p>手机号</p>
           <input v-model="phone" type="text" placeholder="请输入手机号" />
-          <a @click="_send_code_">发送验证码</a>
+          <a v-if="!backgroundspan" @click="_send_code_">{{hqyzm}}</a>
+          <a v-else>{{hqyzm}}</a>
         </li>
         <li>
           <p>验证码</p>
-          <input type="text" style="width: 64%" placeholder="请输入短信验证码" />
+          <input v-model="code" type="text" style="width: 64%" placeholder="请输入短信验证码" />
         </li>
       </ul>
-      <a class="confirm">登录/注册</a>
+      <a class="confirm" @click="_login_phone_">登录/注册</a>
       <p class="sign" @click="_go_login_">账号密码登录</p>
       <div class="bottom">
         <p class="introduce">
@@ -45,16 +46,52 @@ import { Login as API } from "@/assets/api/api";
 export default {
   data() {
     return {
-      phone: ""
+      phone: "",
+      code: "",
+      hqyzm: '获取验证码',
+      backgroundspan: false,
+      situp: true,
     };
   },
   methods: {
     _send_code_() {
       let num = md5(this.phone);
       let data = {
-        phoneNumber: Base64.encode(num)
+        phoneNumber: this.phone
       };
-      this.$api.post(API.sendCode, data).then(res => {});
+      this.$api.post(API.sendCode, data).then(res => {
+        if (res.code == 0){
+          this.inputyz();
+        }
+      });
+    },
+    inputyz(){
+      let timer = 60;
+      let timeres = setInterval(() => {
+        if(timer == 0){
+          clearInterval(timeres);
+          this.hqyzm = '获取验证码';
+          this.backgroundspan = false;
+        }else{
+          this.hqyzm = timer + '秒后重试';
+          this.backgroundspan = true;
+          timer--;
+        }
+      },1000)
+//
+    },
+    _login_phone_(){
+      let data = {
+        deviceType: 'h5',
+        phoneNumber: this.phone,
+        code: this.code
+      };
+      this.$api.post(API.loginWithPhone, data).then(res => {
+        if (res.code == 0){
+          this.$cookie.set('token',res.data.token);
+          this.$router.go(-1);
+        }
+      });
     },
     _go_login_() {
       this.$router.push("/login/index");

@@ -43,7 +43,7 @@ function IsPC() {
 }
 const router = new VueRouter({
   mode: 'history',
-  base: '/num/',
+  base: '/',
   routes
 })
 

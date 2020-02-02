@@ -25,8 +25,8 @@ export default {
       let data = {
         type
       };
-      this.$api.post(API.list, data).then(res => {
-        if (res.code === 200) {
+      this._netGet(API.list, data).then(res => {
+        if (res.code === 0) {
           this.rank = res.data;
         }
       });

@@ -44,8 +44,9 @@ export default {
       this.$emit("id", v);
     },
     _get_Home_page_() {
-      this.$api.post(API.homepage, {}).then(res => {
-        if (res.code === 200) {
+      this.$api.get(API.homepage, {}).then(res => {
+        if (res.code === 0) {
+          console.log('home', res.data);
           this.bannerList = res.data.banners;
           this.oneList = res.data.teachers.splice(0, 10);
           this.twoList = res.data.teachers;

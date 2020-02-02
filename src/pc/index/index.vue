@@ -877,7 +877,9 @@ export default {
     },
     _get_Home_page_() {
       this.$api.post(API.homepage, {}).then(res => {
+        console.log(res)
         if (res.code === 200) {
+          console.log(res)
           this.live_list = res.data.lives;
           let list = [];
           this._change_live_(1);

@@ -26,15 +26,15 @@
         </div>
         <ul class="courselists">
           <li class="item" v-for="(item,index) in list" :key="index">
-            <div class="img">
+            <div class="img" @click="_go_detail_(item)">
               <img :src="item.courseImage" alt />
             </div>
             <div class="content">
-              <p class="title">{{item.courseName}}</p>
-              <p class="bottom">
+              <p class="title" @click="_go_detail_(item)">{{item.courseName}}</p>
+              <p class="bottom" @click="_go_detail_(item)">
                 <span>{{item.user.nikeName}}</span>
               </p>
-              <p class="bottom">
+              <p class="bottom" @click="_go_detail_(item)">
                 <span>{{item.endTime}}</span>
               </p>
               <p class="shoucang mintui mintui-collect"></p>
@@ -76,6 +76,10 @@ export default {
     };
   },
   methods: {
+    _go_detail_(obj) {
+      // console.log(obj)
+      this.$router.push(`course/detail?courseId=${obj.courseId}`)
+    },
     _changeInputClass_(id) {
       this.inputId = id;
       this.aId = 0;
@@ -90,8 +94,8 @@ export default {
         lastId: this.lastId,
         type: id
       };
-      this.$api.post(API.courseList, data).then(res => {
-        if (res.code === 200) {
+      this._netGet(API.courseList, data).then(res => {
+        if (res.code === 0) {
           this.list = res.data;
         }
       });

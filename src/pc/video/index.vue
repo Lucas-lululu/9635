@@ -112,7 +112,7 @@ export default {
         lastId: 0
       };
       this.$api.post(API.courseList, data).then(res => {
-        if (res.code === 200) {
+        if (res.code === 0) {
           this.videoList = res.data.splice(0, 12);
           this.rightList = res.data.splice(0, 5);
         }

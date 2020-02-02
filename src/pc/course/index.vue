@@ -128,7 +128,7 @@ export default {
         filter: 0,
         lastId: 0
       };
-      this.$api.post(API.courseList, data).then(res => {
+      this._name(API.courseList, data).then(res => {
         if (res.code === 200) {
           this.videoList = res.data.splice(0, 12);
           this.hotList = res.data.splice(0, 4);

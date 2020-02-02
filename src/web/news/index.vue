@@ -6,6 +6,7 @@
     <ul class="lists">
       <li
         class="li"
+        @click="_go_article_detail_(item.id)"
         v-for="item in news.articles"
         :class="item.articleImg.length > 1 ? 'active' : ''"
       >
