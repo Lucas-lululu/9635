@@ -9,15 +9,8 @@ export default {
     }
   },
   data() {
-    return {
-      
-    };
+    return {};
   }
-  // created() {
-  //   if (this.$route.name === "teacher") {
-  //     this.title = "人气直播";
-  //   }
-  // }
 };
 </script>
 <style lang="less" scoped>

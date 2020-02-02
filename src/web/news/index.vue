@@ -37,6 +37,7 @@
   </div>
 </template>
 <script>
+import { nextTick } from "q";
 export default {
   props: {
     news: {
@@ -48,6 +49,7 @@ export default {
   },
   methods: {
     _go_() {
+      nextTick;
       this.$router.push("/web/article/index");
       this.$emit("news", 1);
     }

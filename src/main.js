@@ -11,7 +11,7 @@ import store from './store'
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
+import Bus from '@/utils/Bus'
 import Vuecookie from 'vue-cookie'
 import API from './assets/api/request'
 import './assets/iconfont/iconfont.css'
@@ -21,6 +21,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 Vue.use(Vuecookie)
 Vue.prototype.$cookies = Vuecookie
+Vue.prototype.$bus = Bus
 // import Swiper from 'swiper';
 // import 'swiper/css/swiper.css';
 Object.keys(filters).forEach(key => {
