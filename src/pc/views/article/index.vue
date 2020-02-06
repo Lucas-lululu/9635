@@ -1,5 +1,5 @@
 <template>
-  <div class="article">
+  <div class="article" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="main">
       <!-- 头部 -->
       <div class="head">
@@ -47,7 +47,7 @@
               <span>{{body.time | formatDate}}</span>
               <span>
                 参考来源：
-                <span class="red">好人好股</span>
+                <span class="red">易学教育</span>
               </span>
             </span>
             <span>
@@ -176,6 +176,7 @@ import { Detail as API } from "@/assets/api/api";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       navTopList: [
         {
           id: 1,
@@ -262,11 +263,17 @@ export default {
       let data = {
         articleId: id
       };
-      this.$api.post(API.article, data).then(res => {
-        if (res.code === 200) {
+      this._netGet(API.article, data).then(res => {
+        if (res.code === 0) {
           this.body = res.data;
+          this.$emit('fullscreenLoading', false)
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   created() {

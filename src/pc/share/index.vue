@@ -2,7 +2,7 @@
   <div class="download-down-body">
     <div class="download-icon">
       <img src="https://www.9635.com.cn/file/pc_share_log.png" alt />
-      <span>好人好股</span>
+      <span>易学教育</span>
     </div>
     <div class="download-button">
       <ul>

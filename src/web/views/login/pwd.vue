@@ -10,31 +10,56 @@
       <ul>
         <li>
           <p>手机号</p>
-          <input type="text" placeholder="请输入手机号" />
-          <a>发送验证码</a>
+          <input v-model="phoneModel" type="text" placeholder="请输入手机号" />
+          <a @click="_sendCode_">发送验证码</a>
         </li>
         <li>
           <p>验证码</p>
-          <input style="width: 72%" type="text" placeholder="请输入验证码" />
+          <input v-model="codeModel" style="width: 72%" type="text" placeholder="请输入验证码" />
         </li>
         <li style="position: relative;">
           <p>新密码</p>
-          <input style="width: 72%" type="text" placeholder="请输入6~14位登录密码" />
+          <input v-model='pwdModel' style="width: 72%" type="text" placeholder="请输入6~14位登录密码" />
           <span class="eye">
             <img src="@/assets/img/close.png" alt />
           </span>
         </li>
       </ul>
-      <a class="confirm">提交</a>
+      <a class="confirm" @click="_resetLogin_">提交</a>
     </div>
   </div>
 </template>
 <script>
+import { Login as API } from '@/assets/api/api'
 export default {
   data() {
-    return {};
+    return {
+      phoneModel: '',
+      codeModel: '',
+      pwdModel: ''
+    };
   },
   methods: {
+    _resetLogin_() {
+      let data = {
+        "phoneNumber": this.phoneModel,
+        "code": this.codeModel,
+        "newPassword": this.pwdModel
+      }
+      this.$api.post(API.resetLogin, data).then(res => {
+        console.log(res)
+      })
+    },
+    _sendCode_() {
+      let data = {
+        phoneNumber: this.phoneModel
+      }
+      this.$api.post(API.sendCode, data).then(res => {
+        if (res.code == 0){
+          this.inputyz();
+        }
+      });
+    },
     _return_() {
       console.log(123);
       this.$router.go(-1);

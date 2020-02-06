@@ -18,24 +18,24 @@
       <ul>
         <li>
           <p>账 号</p>
-          <input type="text" placeholder="请输入账号" />
+          <input type="text" placeholder="请输入账号" v-model="webModel" />
         </li>
         <li>
           <p>密 码</p>
-          <input type="text" style="width: 60%" placeholder="请输入密码" />
-          <span class="eye">
+          <input :type="pwdType" v-model="webPwd" style="width: 60%" placeholder="请输入密码" />
+          <span class="eye" @click="_changePWD_">
             <img src="@/assets/img/close.png" alt />
           </span>
         </li>
       </ul>
-      <a class="confirm">登录</a>
+      <a class="confirm" @click="_pwd_login_">登录</a>
       <p class="sign">
         <span @click="_go_pwd_">忘记密码？</span>
         <span @click="_go_phone_">验证码登录</span>
       </p>
       <div class="bottom">
         <p class="introduce">
-          <span>登录或注册即代表您同意好人好股的</span>
+          <span>登录或注册即代表您同意易学教育的</span>
           <span class="agreement">《用户协议》</span>
         </p>
       </div>
@@ -43,16 +43,44 @@
   </div>
 </template>
 <script>
+import { Login as API} from '@/assets/api/api'
 export default {
   data() {
-    return {};
+    return {
+      webModel: '',
+      webPwd: '',
+      pwdType: 'password'
+    };
   },
   methods: {
     _go_pwd_() {
-      this.$router.push("/login/forget_pwd");
+      this.$router.push("/web/login/forget_pwd");
     },
     _go_phone_() {
-      this.$router.push("/login/phone_login");
+      this.$router.push("/web/login/phone_login");
+    },
+    _changePWD_() {
+      if (this.pwdType === 'password') {
+        this.pwdType = 'text'
+      } else {
+        this.pwdType = 'password'
+      }
+    },
+    _pwd_login_() {
+      if (this.webPwd && this.webModel) {
+        let data = {
+          mobile: this.webModel,
+          password: this.webPwd
+        }
+        this.$api.post(API.login, data).then(res => {
+          if (res.code === 0) {
+            this.$cookie.set('token', res.data.token)
+            this.$layer.msg('登录成功')
+            this.$router.push('/web/mine')
+          }
+        })
+      }
+      
     },
     _return_() {
       this.$router.go(-1);

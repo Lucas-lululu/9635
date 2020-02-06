@@ -1,5 +1,5 @@
 <template>
-  <div class="teacher">
+  <div class="teacher" v-loading.fullscreen.lock="fullscreenLoading">
     <v-header />
     <v-rank :rank="rank" @aId="_watch_aId_" />
     <v-footer-menu />
@@ -13,6 +13,7 @@ import { Teacher as API } from "@/assets/api/api";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       rank: [],
       type: ""
     };
@@ -22,14 +23,20 @@ export default {
       this._getList_(v);
     },
     _getList_(type) {
+      this.fullscreenLoading = true
       let data = {
         type
       };
       this._netGet(API.list, data).then(res => {
         if (res.code === 0) {
           this.rank = res.data;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   created() {

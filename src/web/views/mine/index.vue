@@ -87,6 +87,11 @@ export default {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             center: true
+          }).then(() => {
+            // this.$cookie.remove('token',[window.location.href])
+            this.$cookie.set('token','')
+            this.$layer.msg('退出成功')
+            this.$router.push('/web/login/index')
           })
         }
       } else {
@@ -98,6 +103,7 @@ export default {
         deviceType: "h5"
       };
       this._netGet(API.info, data).then(res => {
+        console.log(res)
         if (res.code == 100005002){
           this._go_login();
           return;
@@ -113,10 +119,10 @@ export default {
     "v-footer": FooterMenu
   },
   created() {
-    if (!this.$cookie.get("token")) {
-      this.$router.push("/web/login/phone_login");
-    } else {
+    if (this.$cookie.get("token")) {
       this._getInfo_();
+      } else {
+      this.$router.push("/web/login/phone_login");
     }
   }
 };

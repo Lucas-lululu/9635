@@ -18,7 +18,7 @@
             </div>
             <div class="name">
               <span>{{item.nikeName}}</span>
-              <span>好人好股</span>
+              <span>易学教育</span>
               <div class="live-name">{{item.nikeName}}的直播间</div>
               <div class="font">
                 <span>{{item.level}}</span>

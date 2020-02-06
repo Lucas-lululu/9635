@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="border-bottom">
       <i class="el-icon-arrow-left" @click="_return_"></i>
       <span class="name">{{nikeName}}</span>
@@ -163,6 +163,7 @@ export default {
   name: "home",
   data() {
     return {
+      fullscreenLoading: true,
       data: [],
       navList: [
         { id: 0, name: "互动" },
@@ -257,6 +258,7 @@ export default {
     },
     // 课程
     _getCourses_() {
+      this.fullscreenLoading = true
       let data = {
         lastId: 0,
         teacherId: this.$route.query.teacherId
@@ -264,11 +266,17 @@ export default {
       this._netGet(API.courses, data).then(res => {
         if (res.code === 0) {
           this.coursesList = res.data.list;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+          setTimeout(() => {
+            this.fullscreenLoading = false
+          }, 2000)
+        })
     },
     // 观点
     _getInformation_() {
+      this.fullscreenLoading = true
       let data = {
         lastId: 0,
         teacherId: this.$route.query.teacherId,
@@ -278,11 +286,17 @@ export default {
       this.$api.get(API.Information+'?'+params).then(res => {
         if (res.code === 0) {
           this.informationList = res.data.list;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     },
     // 视频
     _getVideo_() {
+      this.fullscreenLoading = true
       let data = {
         lastId: 0,
         teacherId: this.$route.query.teacherId
@@ -290,8 +304,13 @@ export default {
       this._netGet(API.video, data).then(res => {
         if (res.code === 0) {
           this.videoList = res.data.list;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     },
     _getDetail_() {
       let data = {
@@ -317,7 +336,6 @@ export default {
       if (str.length > 0) {
         body = str.join('&');
       }
-
       this.$api.get(API.info+'?' +body).then(res => {
         if (res.code === 0) {
           this.data = res.data;
@@ -326,8 +344,13 @@ export default {
           this.fansCount = this.data.fansCount;
           this.certificate = this.data.certificate;
           this.introduce = this.data.introduce;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     },
     _netGet(url, data){
       const str = [];

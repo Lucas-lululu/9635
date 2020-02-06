@@ -1,10 +1,12 @@
 <template>
-  <div class="video">
+  <div class="video" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="top">
       <span>当前位置：
         <a>首页> </a>
-        <a v-if="body.user">{{body.user.nikeName}}> </a>
+        <a v-if="videoList.length > 0">{{body.user.nikeName}}> </a>
         <a>{{body.title}} </a>
+        <!-- <a v-if="body.user">{{body.user.nikeName}}> </a>
+        <a>{{body.title}} </a> -->
       </span>
     </div>
     <div class="body">
@@ -56,7 +58,8 @@
 </template>
 <script>
 import VueDplayer from '@/components/vdplayer'
-import {Detail as API} from '@/assets/api/api'
+// import {Detail as API from '@/assets/api/api'
+import * as API from '@/assets/api/api'
 export default {
   data () {
     return {
@@ -86,35 +89,59 @@ export default {
           id: 1,
           title: ''
         }
-      ]
+      ],
+      fullscreenLoading: true
     }
   },
   methods: {
     _go_(obj) {
-      window.location.href = `/pc/video/detail?videoId=${obj.articleId}&teacherId=${obj.userId}`
+      // console.log(obj)
+      // window.location.href = `/pc/video/detail?videoId=${obj.articleId}&teacherId=${obj.userId}`
     },
     _get_video_(id) {
       let data = {
         teacherId: id,
         lastId: 0
       }
-      this.$api.post(API.video, data).then(res => {
-        if (res.code === 200) {
-          this.videoList = res.data.splice(0, 8)
-        }
-      })
+      // this.$api.post(API.video, data).then(res => {
+      //   if (res.code === 0) {
+      //     this.videoList = res.data.splice(0, 8)
+      //   }
+      // })
     },
     _get_Data_(id) {
       let data = {
         videoId: id
       }
-      this.$api.post(API.videoDetail, data).then(res => {
-        if (res.code === 200) {
-          this.body = res.data
-          this.url = this.body.videoUrl
-          this.pic = this.body.videoImage
-          this._get_video_(this.body.user.userId)
+      // this.$api.post(API.videoDetail, data).then(res => {
+      // this._netGet(API.Detail.videoDetail, data).then(res => {
+      //   console.log(res)
+      //   if (res.code === 200) {
+      //     this.body = res.data
+      //     this.url = this.body.videoUrl
+      //     this.pic = this.body.videoImage
+      //     this._get_video_(this.body.user.userId)
+      //   }
+      // })
+      // console.log(this.$route)
+      // let obj = this.$route.params
+      // this.url = obj.videoUrl
+      // this.pic = obj.videoImage
+      // this.body = obj.user
+      this.$api.post(API.Detail.video, {teacherId: "1217788431430586370",lastId: 0}).then(res => {
+        if (res.code === 0) {
+          this.videoList = res.data.list
+          this.url = this.videoList[0].videoUrl
+          this.pic = this.videoList[0].videoImage
+          this.body.title = this.videoList[0].title
+          this.body.user = this.videoList[0].user
+          this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
       })
     }
   },

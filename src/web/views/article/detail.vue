@@ -1,5 +1,5 @@
 <template>
-  <div class="article_detail_box">
+  <div class="article_detail_box" v-loading.fullscreen.lock="fullscreenLoading">
     <v-header />
     <div class="detail_content">
       <div class="detail_title">{{list.title}}</div>
@@ -24,7 +24,7 @@
             <i class="el-icon-arrow-down" @click="_show_"></i>
           </div>
           <div class="box">
-            <a class="btn">打开好人好股App，看更多精彩内容</a>
+            <a class="btn">打开易学教育App，看更多精彩内容</a>
           </div>
         </div>
       </div>
@@ -39,6 +39,7 @@ import { type } from "os";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       list: [
         {
           title: "",
@@ -93,8 +94,19 @@ export default {
       this._netGet(API.article, data).then(res => {
         if (res.code === 0) {
           this.list = res.data;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
+    }
+  },
+  updated() {
+    let dom = document.getElementsByClassName('ql-align-justify')
+    for (let key of dom) {
+      // key.style.color = 'red'
     }
   },
   created() {

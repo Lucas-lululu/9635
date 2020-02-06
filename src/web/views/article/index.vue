@@ -1,11 +1,11 @@
 <template>
-  <div class="index_article">
+  <!-- <div class="index_article">
     <div class="tabs">
       <i class="el-icon-arrow-left" @click="_return_"></i>
       <a>资讯</a>
     </div>
     <ul class="lists">
-      <li class="li" v-for="item in list" :class="item.articleImg.length > 1 ? 'active' : ''">
+      <li class="li" v-for="item in list" :class="item.articleImg.length > 1 ? 'active' : ''" @click="_go_(item)">
         <div class="author-info">
           <div class="avatar">
             <img :src="item.user.avatarUrl" alt />
@@ -29,9 +29,11 @@
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
+  <v-news :news='list' />
 </template>
 <script>
+import News from "@/web/news";
 import { List as API } from "@/assets/api/api";
 export default {
   data() {
@@ -39,10 +41,16 @@ export default {
       list: []
     };
   },
+  components: {
+    'v-news': News
+  },
   methods: {
     _return_() {
       this.$router.go(-1);
       this.$emit("article", 1);
+    },
+    _go_(obj) {
+      this.$router.push(`/web/article/detail?articleId=${obj.id}`)
     },
     _getList_() {
       let data = {
@@ -50,8 +58,8 @@ export default {
         today: false,
         type: 0
       };
-      this.$api.post(API.articleList, data).then(res => {
-        if (res.code === 200) {
+      this._netGet(API.articleList, data).then(res => {
+        if (res.code === 0) {
           this.list = res.data;
         }
       });

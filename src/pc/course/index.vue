@@ -1,5 +1,5 @@
 <template>
-  <div class="course">
+  <div class="course" v-loading.fullscreen.lock="fullscreenLoading">
     <v-head />
     <div class="main">
       <div class="right">
@@ -16,7 +16,7 @@
             </div>
             <div class="hrhg_index_content">
               <P class="title">{{item.courseName}}</P>
-              <P class="content">{{item.introduce}}</P>
+              <!-- <P class="content">{{item.introduce}}</P>/ -->
               <p class="bottom">
                 <span class="name">{{item.user.nikeName}}</span>
                 <span class="watch">
@@ -41,6 +41,7 @@ import { Course as API } from "@/assets/api/api";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       list: [
         {
           id: 1,
@@ -117,7 +118,58 @@ export default {
           name: "财经资讯"
         }
       ],
-      hotList: [],
+      hotList: [
+        {
+          courseId: 1,
+          courseImage: 'https://images-test.integrity.com.cn/75eeb76225234751b2335438503e6b4c_%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200203191202.png',
+          user: {
+            nikeName: '孙清'
+          },
+          courseName: '20200203-沪指下跌近8% 北向资金逆市净流入近200亿元',
+          stratTime: '2020-02-03 18:50:00',
+          watchCount: 2554
+        },
+        {
+          courseId: 2,
+          courseImage: 'https://images-test.integrity.com.cn/5421abf004d74d0d93521eefa7e5516f_%E5%B0%8F%E6%B8%94%E7%BB%93%E6%9E%84.png',
+          user: {
+            nikeName: '徐文明团队'
+          },
+          courseName: '出局还是平仓？',
+          stratTime: '2020-02-03 09:45:14',
+          watchCount: 1755
+        },
+        {
+          courseId: 3,
+          courseImage: 'https://images-test.integrity.com.cn/ba645a20a5974644b79586fc5b5d0b00_6281d9f0aa7f4fcf86ad5e1d9061b5d2_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191202140300.jpg',
+          user: {
+            nikeName: '吕长顺'
+          },
+          courseName: '20200203-凯恩斯看盘',
+          stratTime: '2020-02-03 10:00:14',
+          watchCount: 809
+        },
+        {
+          courseId: 4,
+          courseImage: 'https://images-test.integrity.com.cn/136acef3e2694fe0b92aed45cc9644b0_%E5%A5%BD%E4%BA%BA%E5%A5%BD%E8%82%A1app.jpg',
+          user: {
+            nikeName: '王喜龙'
+          },
+          courseName: '大盘还没跌完，谈谈对后市的看法',
+          stratTime: '2020-02-03 13:22:52',
+          watchCount: 497
+        },
+        {
+          courseId: 5,
+          courseImage: 'https://images-test.integrity.com.cn/a694ad7f52b54d99a6f39eace7f2c09a_1%20_2_.jpg',
+          user: {
+            nikeName: '王喜龙'
+          },
+          courseName: '下跌效率真高，明天不用急着割肉了',
+          stratTime: '2020-02-03 17:43:47',
+          watchCount: 355
+        }
+      ],
       videoList: []
     };
   },
@@ -128,12 +180,18 @@ export default {
         filter: 0,
         lastId: 0
       };
-      this._name(API.courseList, data).then(res => {
-        if (res.code === 200) {
+      this._netGet(API.courseList, data).then(res => {
+        if (res.code === 0) {
           this.videoList = res.data.splice(0, 12);
-          this.hotList = res.data.splice(0, 4);
+          this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
+          // this.hotList = res.data.splice(0, 4);
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   created() {
@@ -178,7 +236,8 @@ export default {
           cursor: pointer;
           padding: 0;
           width: 221px;
-          height: 252px;
+          // height: 252px;
+          height: 215px;
           background: rgba(255, 255, 255, 1);
           float: left;
           margin-right: 16px;
@@ -197,6 +256,7 @@ export default {
             height: 148px;
             overflow: hidden;
             img {
+              height: 100%;
               width: 100%;
             }
           }

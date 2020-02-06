@@ -75,6 +75,7 @@ export default {
         type
       };
       this.$api.post(API.collectionList, data).then(res => {
+        console.log(res)
         if (res.code === 200) {
           this.collectionList = res.data;
           if (this.collectionList.length > 0) {

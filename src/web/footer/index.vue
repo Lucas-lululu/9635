@@ -71,7 +71,7 @@ export default {
     }
   },
   created() {
-    this.$cookie.set("authorization", "2b5fe3d34e364a4f8ee9444bb3014965");
+    // this.$cookie.set("token", "2b5fe3d34e364a4f8ee9444bb3014965");
     this.route = this.$route.name;
   }
 };

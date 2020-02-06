@@ -1,5 +1,5 @@
 <template>
-    <div class="course-detail-box" v-if="body">
+    <div class="course-detail-box" v-if="body" v-loading.fullscreen.lock="fullscreenLoading">
         <!-- 头部图片 -->
         <div class="detail-header">
             <i class="el-icon-arrow-left" @click="_return_"></i>
@@ -113,6 +113,7 @@ import  * as API  from '@/assets/api/api'
 export default {
     data () {
         return {
+            fullscreenLoading: true,
             navList: [
                 {
                     id: 1,
@@ -144,22 +145,34 @@ export default {
             this._netGet(API.Detail.courseDetail, data).then(res => {
                 if (res.code === 0) {
                     this.body = res.data
+                    this.fullscreenLoading = false
                 }
+            }).catch(err => {
+                setTimeout(() => {
+                    this.fullscreenLoading = false
+                }, 2000)
             })
         },
         // 获取详情目录列表
         _get_detail_() {
+            this.fullscreenLoading = true
             let data = {
                 courseId: this.Id
             }
             this.$api.post(API.List.lessonList, data).then(res => {
                 if (res.code === 0) {
                     this.lessList = res.data
+                    this.fullscreenLoading = false
                 }
+            }).catch(err => {
+                setTimeout(() => {
+                    this.fullscreenLoading = false
+                }, 2000)
             })
         },
         // 获取详情评论列表
         _get_courseList_() {
+            this.fullscreenLoading = true
             let data = {
                 courseId: this.Id
             }
@@ -168,7 +181,12 @@ export default {
                 //    this.commentList = res.data
                    console.log('评论')
                    console.log(res)
+                   this.fullscreenLoading = false
                 }
+            }).catch(err => {
+                setTimeout(() => {
+                    this.fullscreenLoading = false
+                }, 2000)
             })
         },
         _return_() {

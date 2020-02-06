@@ -31,7 +31,7 @@
       <p class="sign" @click="_go_login_">账号密码登录</p>
       <div class="bottom">
         <p class="introduce">
-          <span>登录或注册即代表您同意好人好股的</span>
+          <span>登录或注册即代表您同意易学教育的</span>
           <span class="agreement">《用户协议》</span>
         </p>
       </div>
@@ -89,12 +89,14 @@ export default {
       this.$api.post(API.loginWithPhone, data).then(res => {
         if (res.code == 0){
           this.$cookie.set('token',res.data.token);
-          this.$router.go(-1);
+          // this.$router.go(-1);
+          this.$layer.msg('登录成功')
+          this.$router.push('/web/mine')
         }
       });
     },
     _go_login_() {
-      this.$router.push("/login/index");
+      this.$router.push("/web/login/index");
     },
     _return_() {
       this.$router.push("/index");

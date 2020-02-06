@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.fullscreen.lock="fullscreenLoading">
     <div class="top">
       <div class="nav">
         <a
@@ -53,6 +53,7 @@ import { Course as API } from "@/assets/api/api";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       topList: [
         {
           id: 1,
@@ -89,6 +90,7 @@ export default {
       this.aId = id;
     },
     _getCourse_(id) {
+      this.fullscreenLoading = true
       let data = {
         filter: this.filter,
         lastId: this.lastId,
@@ -97,8 +99,13 @@ export default {
       this._netGet(API.courseList, data).then(res => {
         if (res.code === 0) {
           this.list = res.data;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   mounted() {

@@ -13,10 +13,10 @@
       <ul class="left-list">
         <li v-for="item in videoList" :key="item.id" class="video-item" @click="_go_(item)">
           <div class="video-box">
-            <img :src="item.courseImage" alt />
+            <img :src="item.videoImage" alt />
           </div>
           <div class="hrhg_index_videodesc">
-            <P>{{item.courseName}}</P>
+            <P>{{item.title}}</P>
             <P>{{item.user.nikeName}}</P>
             <p>
               <span class="first">
@@ -25,7 +25,7 @@
               </span>
               <span class="last">
                 <i class="el-icon-timer"></i>
-                <span>{{item.startTime | formatDate}}</span>
+                <span>{{item.time | formatDate}}</span>
               </span>
             </p>
           </div>
@@ -44,11 +44,20 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    console.log(this.videoList)
+  },
   methods: {
     _go_(obj) {
-      this.$router.push(
-        `/pc/video/detail?videoId=${obj.courseId}&teacherId=${obj.user.userId}`
-      );
+      // console.log(obj)
+        // this.$router.push(
+        //   `/pc/video/detail?videoId=${obj.id}&teacherId=${obj.userId}`
+        // );
+        // console.log(obj)
+        this.$router.push({
+          name:  `pcvideoDetail`, 
+          params: obj
+        });
     }
   }
 };
@@ -202,6 +211,7 @@ export default {
           overflow: hidden;
           img {
             width: 100%;
+                        height: 100%;
           }
         }
         .hrhg_index_videodesc {

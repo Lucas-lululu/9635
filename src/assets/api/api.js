@@ -1,4 +1,4 @@
-// const PATH_HEAD = `https://api.9635.com.cn`
+const API_HEAD = `https://api.9635.com.cn`
 const PATH_HEAD = `http://47.101.68.155:8201`
 const WWW_HEAD = `https://www.9635.com.cn`
 
@@ -10,11 +10,13 @@ export const Index = {
 }
 
 export const Course = {
-  courseList: `${PATH_HEAD}/api/finance/course/list`
+  courseList: `${PATH_HEAD}/api/finance/course/list`,
+  video: `${API_HEAD}/teacher/videos`
 }
 
 export const Teacher = {
-  list: `${PATH_HEAD}/api/finance/rank/list`
+  list: `${PATH_HEAD}/api/finance/rank/list`,
+  video: `${API_HEAD}/teacher/videos`
 }
 
 export const Detail = {
@@ -29,7 +31,7 @@ export const Detail = {
 }
 
 export const List = {
-  articleList: `${PATH_HEAD}/v2/article/list`,
+  articleList: `${PATH_HEAD}/api/finance/article/list`,
   collectionList: `${PATH_HEAD}/v2/collection/list`,
   follows: `${PATH_HEAD}/user/follows`,
   courseCommentList: `${PATH_HEAD}/api/finance/course/commentList`,
@@ -39,5 +41,7 @@ export const List = {
 export const Login = {
   info: `${PATH_HEAD}/api/finance/user/info`,
   sendCode: `${PATH_HEAD}/api/finance/login/sendVerityCode`,
-  loginWithPhone: `${PATH_HEAD}/api/finance/login/loginWithPhone`
+  loginWithPhone: `${PATH_HEAD}/api/finance/login/loginWithPhone`,
+  login: `${PATH_HEAD}/api/finance/login/login`,
+  resetLogin: `${PATH_HEAD}/api/finance/login/resetPassword`
 }

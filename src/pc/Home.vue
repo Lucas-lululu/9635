@@ -1,5 +1,5 @@
 <template>
-  <div id="pc">
+  <div id="pc" v-loading.fullscreen.lock="fullscreenLoading">
     <!-- pc-顶部横条 -->
     <div class="nav-top">
       <div>
@@ -29,15 +29,15 @@
       </div>
     </div>
     <!-- pc-index视图 -->
-    <router-view />
+    <router-view @fullscreenLoading="_loding_" />
     <v-right />
-    <v-left />
-    <v-footer v-if="show" />
+    <!-- <v-left /> -->
+    <v-footer v-if="show && !fullscreenLoading" />
   </div>
 </template>
 <script>
 import Right from "@/components/ad/right";
-import Left from "@/components/ad/left";
+// import Left from "@/components/ad/left";
 import Footer from "./footer";
 export default {
   data() {
@@ -90,12 +90,16 @@ export default {
       rank: [],
       news: [],
       show: true,
-      classId: 1
+      classId: 1,
+      fullscreenLoading: true
     };
   },
   methods: {
     _class_change_(obj) {
       this.classId = obj.id;
+    },
+    _loding_(v) {
+      this.fullscreenLoading = v
     }
   },
   mounted() {
@@ -134,7 +138,7 @@ export default {
   components: {
     "v-footer": Footer,
     "v-right": Right,
-    "v-left": Left
+    // "v-left": Left
   }
 };
 // prettier

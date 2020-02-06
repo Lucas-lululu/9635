@@ -480,35 +480,35 @@ export default {
           img:
             "https://images-test.integrity.com.cn/475d32646aa447748b3d900f114ab734_sunqing.png",
           name: "孙清",
-          title: "好人好股高端操盘手"
+          title: "易学教育高端操盘手"
         },
         {
           id: 2,
           img:
             "https://images-test.integrity.com.cn/0eef204105e84e6bbb5343f69e988f0b_bianfengwei.png",
           name: "边风炜",
-          title: "好人好股高端操盘手"
+          title: "易学教育高端操盘手"
         },
         {
           id: 3,
           img:
             "https://images-test.integrity.com.cn/ce23217ca7ae4d60a114040b426c40e3_kaiensi.png",
           name: "吕长顺",
-          title: "好人好股高端操盘手"
+          title: "易学教育高端操盘手"
         },
         {
           id: 4,
           img:
             "https://images-test.integrity.com.cn/26e0f431e5294aae943489b2c4ac6a7b_xuwenming.png",
           name: "徐文明团队",
-          title: "好人好股高端操盘手"
+          title: "易学教育高端操盘手"
         },
         {
           id: 5,
           img:
             "https://images-test.integrity.com.cn/75a6bede95fb46f3aded97ebe4d326d0_weininghai.png",
           name: "魏宁海",
-          title: "好人好股高端操盘手"
+          title: "易学教育高端操盘手"
         }
       ], // 大V面对面
       leftTeacherList: [
@@ -876,10 +876,8 @@ export default {
       }
     },
     _get_Home_page_() {
-      this.$api.post(API.homepage, {}).then(res => {
-        console.log(res)
-        if (res.code === 200) {
-          console.log(res)
+      this.$api.get(API.homepage, {}).then(res => {
+        if (res.code === 0) {
           this.live_list = res.data.lives;
           let list = [];
           this._change_live_(1);
@@ -899,6 +897,7 @@ export default {
           this.twoList = res.data.teachers;
           this.rank = res.data.rank;
           this.news = res.data.information;
+          this.$emit('fullscreenLoading', false)
         }
       });
     }

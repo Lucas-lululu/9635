@@ -1,13 +1,14 @@
 <template>
-  <div class="index_article">
+  <div class="index_article" v-if="news.length > 0">
     <div class="tabs">
+      <i class="el-icon-arrow-left" @click="_return_" v-if="iconShow"></i>
       <a>资讯</a>
     </div>
     <ul class="lists">
       <li
         class="li"
         @click="_go_article_detail_(item.id)"
-        v-for="item in news.articles"
+        v-for="item in news"
         :class="item.articleImg.length > 1 ? 'active' : ''"
       >
         <div class="author-info">
@@ -44,12 +45,24 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      iconShow: false
+    };
+  },
+  mounted() {
+    if (this.$route.name === 'webarticle') {
+      this.iconShow = true
+    } else {
+      this.iconShow = false
+    }
   },
   methods: {
     _go_() {
       this.$router.push("/web/article/index");
       this.$emit("news", 1);
+    },
+    _return_() {
+      this.$router.go(-1)
     }
   },
   watch: {
@@ -75,6 +88,11 @@ export default {
     // padding: 20px 19px 15px 19px;
     display: flex;
     justify-content: center;
+    position: relative;
+    > i {
+      position: absolute;
+      left: 10px;
+    }
     > a {
       display: inline-block;
       font-size: 17px;

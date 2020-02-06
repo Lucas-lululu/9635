@@ -42,7 +42,7 @@ function IsPC() {
   return flag;
 }
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: '/',
   routes
 })

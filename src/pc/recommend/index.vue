@@ -1,5 +1,5 @@
 <template>
-  <div class="recomment">
+  <div class="recomment" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="teacher_index_adview">
       <img src="https://www.9635.com.cn/file/adview.jpg" />
     </div>
@@ -23,10 +23,14 @@
               </div>
               <div class="name">
                 <span>{{item.nikeName}}</span>
-                <span>好人好股</span>
+                <span>易学教育</span>
                 <div class="live-name">{{item.nikeName}}的直播间</div>
-                <div class="font">
+                <div class="font" v-if="item.level">
                   <span>{{item.level}}</span>
+                  粉丝
+                </div>
+                <div class="font" v-else>
+                  <span>0</span>
                   粉丝
                 </div>
               </div>
@@ -103,6 +107,7 @@ import { Index as API } from "@/assets/api/api";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       leftTeacherList: [], // 左边列表
       rightTeacherList: [
         {
@@ -150,7 +155,7 @@ export default {
             "https://images-test.integrity.com.cn/fb70ca47e3fa4016a5b1c8c5a1a556b0_wechatimg12%403x.png",
           certificateNumber: "",
           introduce:
-            "孙清（江海老师） \r\n好人好股投教首席培训导师，担任多家阳光私募的投资总顾问，曾任复旦大学证券研究所投资者教育基地副主任、复旦大学证券研究所高级研究员，具有丰富的职业操盘手培训经验，数年来为国内私募输送了大批顶级的优秀技术分析师。",
+            "孙清（江海老师） \r\n易学教育投教首席培训导师，担任多家阳光私募的投资总顾问，曾任复旦大学证券研究所投资者教育基地副主任、复旦大学证券研究所高级研究员，具有丰富的职业操盘手培训经验，数年来为国内私募输送了大批顶级的优秀技术分析师。",
           rankType: 3,
           follow: 11583,
           isVip: 0,
@@ -164,7 +169,7 @@ export default {
             "https://images-test.integrity.com.cn/3374e8233e3247c183e01af055eecf00_%E5%BE%90%E6%96%87%E6%98%8E%403x.png",
           certificateNumber: "",
           introduce:
-            "  徐文明团队\r\n【徐文明】 证书编号：A0150119010002\r\n好人好股名誉院长，财富讲坛特邀嘉宾，清华大学操盘学特聘讲师，CCTV证券资讯《投资我主张》特邀嘉宾， 证券投资界的著名投资人，20年职业操盘手，基金管理人。 当代中国杰出的A股市场股评家。\r\n【刘凤（小渔）】证书编号：A0150619070001\r\n国际经济与贸易，行为心理学专业，曾担任多家知名证券咨询机构分析师，拥有理财规划师，基金从业，投资顾问等多项权威认证，活跃于股市，期货市场，自主研发《解密结构》理论。",
+            "  徐文明团队\r\n【徐文明】 证书编号：A0150119010002\r\n易学教育名誉院长，财富讲坛特邀嘉宾，清华大学操盘学特聘讲师，CCTV证券资讯《投资我主张》特邀嘉宾， 证券投资界的著名投资人，20年职业操盘手，基金管理人。 当代中国杰出的A股市场股评家。\r\n【刘凤（小渔）】证书编号：A0150619070001\r\n国际经济与贸易，行为心理学专业，曾担任多家知名证券咨询机构分析师，拥有理财规划师，基金从业，投资顾问等多项权威认证，活跃于股市，期货市场，自主研发《解密结构》理论。",
           rankType: 3,
           follow: 9591,
           isVip: 1,
@@ -178,7 +183,7 @@ export default {
             "https://images-test.integrity.com.cn/bf50f527f45d4d30b8ef4da06a7d5f55_%E9%AD%8F%E8%80%81%E5%B8%88%E6%96%B0%403x.png",
           certificateNumber: "",
           introduce:
-            "好人好股名誉院长\r\n新浪SHOW首席投资顾问\r\n第一财经特约财经评论员\r\n专注于技术战法分析和研究，属于现代股市实战派的代表人物。善于把复杂深奥的股市技术用自己生动的图形表达描述出来。",
+            "易学教育名誉院长\r\n新浪SHOW首席投资顾问\r\n第一财经特约财经评论员\r\n专注于技术战法分析和研究，属于现代股市实战派的代表人物。善于把复杂深奥的股市技术用自己生动的图形表达描述出来。",
           rankType: 3,
           follow: 8747,
           isVip: 0,
@@ -206,7 +211,7 @@ export default {
             "https://images-test.integrity.com.cn/84f6d7dc97754cc9acd23bd6de9e0307_wechatimg288%403x.png",
           certificateNumber: "",
           introduce:
-            "好人好股明星讲师\r\n第一财经《公司与行业》和《财经风味》栏目重要嘉宾。\r\n2017年2月28日至2019年3月8日第一财经旗下“有看投”个人锦囊总收益高达144.72%。\r\n十年新经济研究，F10功能发起人和参与者之一，5年10万份研报的阅读量级，对因基本面变化而形成的投资机会总结出一套独到的分析系统和应用方法，通过三大逻辑前瞻性的把握热点和主题性投资机会。\r\n当下主流题材投资和主题投资模版的创造者和引领者之一，在市场上率先推出并持续挖掘了上千余个题材，极大的丰富了机构和个人投资者的投资方法。",
+            "易学教育明星讲师\r\n第一财经《公司与行业》和《财经风味》栏目重要嘉宾。\r\n2017年2月28日至2019年3月8日第一财经旗下“有看投”个人锦囊总收益高达144.72%。\r\n十年新经济研究，F10功能发起人和参与者之一，5年10万份研报的阅读量级，对因基本面变化而形成的投资机会总结出一套独到的分析系统和应用方法，通过三大逻辑前瞻性的把握热点和主题性投资机会。\r\n当下主流题材投资和主题投资模版的创造者和引领者之一，在市场上率先推出并持续挖掘了上千余个题材，极大的丰富了机构和个人投资者的投资方法。",
           rankType: 1,
           follow: 6629,
           isVip: 0,
@@ -301,11 +306,17 @@ export default {
   },
   methods: {
     _get_Home_page_() {
-      this.$api.post(API.homepage, {}).then(res => {
-        if (res.code === 200) {
+      this.$api.get(API.homepage, {}).then(res => {
+        if (res.code === 0) {
           this.teacherList = res.data.teachers.splice(0, 10);
+          this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     },
     _get_list_(page = 1, pageSize = 6) {
       let data = {
@@ -319,7 +330,6 @@ export default {
     "v-teacher": Teacher
   },
   created() {
-    // this._get_list_()
     this._get_Home_page_();
   }
 };

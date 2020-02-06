@@ -1,11 +1,11 @@
 <template>
-  <div class="video">
+  <div class="video" v-loading.fullscreen.lock="fullscreenLoading">
     <p class="video-logo">
       <img src="https://www.9635.com.cn/images/video-logo.png" />
     </p>
     <d-player :url="url" :pic="pic" :type="type" />
     <div class="des">
-      <a class="btn">打开好人好股App，看更多精彩视频</a>
+      <a class="btn">打开易学教育App，看更多精彩视频</a>
       <p class="title">{{title}}</p>
       <p class="info">
         <i class="el-icon-view"></i>
@@ -36,6 +36,7 @@ import VueDplayer from "@/components/vdplayer";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       url: "",
       pic: "",
       type: "",
@@ -72,8 +73,13 @@ export default {
             }
           }
           this.list = res.data.list;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   created() {

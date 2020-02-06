@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.fullscreen.lock="fullscreenLoading">
     <!-- 首页轮播图 -->
     <div class="carousel_box">
       <v-swiper :bannerList="bannerList" />
@@ -25,7 +25,8 @@ export default {
       oneList: [],
       twoList: [],
       rank: [],
-      news: []
+      news: [],
+      fullscreenLoading: true
       // screenWidth: document.body.clientWidth
     };
   },
@@ -46,14 +47,18 @@ export default {
     _get_Home_page_() {
       this.$api.get(API.homepage, {}).then(res => {
         if (res.code === 0) {
-          console.log('home', res.data);
           this.bannerList = res.data.banners;
           this.oneList = res.data.teachers.splice(0, 10);
           this.twoList = res.data.teachers;
           this.rank = res.data.rank;
-          this.news = res.data.information;
+          this.news = res.data.information.articles;
+          this.fullscreenLoading = false
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   mounted() {

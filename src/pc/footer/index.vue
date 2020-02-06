@@ -13,12 +13,12 @@
           <div class="log">
             <img src="https://www.9635.com.cn/file/download.png" alt />
             <p>让投资因学习而确定</p>
-            <p>扫描二维码下载好人好股APP</p>
+            <p>扫描二维码下载易学教育APP</p>
           </div>
           <div class="code">
             <img src="https://www.9635.com.cn/file/wechat.png" alt />
             <p>微信扫一扫</p>
-            <p>关注「好人好股」公众号</p>
+            <p>关注「易学教育」公众号</p>
           </div>
         </div>
       </div>

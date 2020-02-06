@@ -1,5 +1,5 @@
 <template>
-  <div class="article">
+  <div class="article" v-loading.fullscreen.lock="fullscreenLoading">
     <v-head />
     <div class="main">
       <div class="left-box">
@@ -43,6 +43,7 @@ import { List as API } from "@/assets/api/api";
 export default {
   data() {
     return {
+      fullscreenLoading: true,
       list: [],
       topList: [
         {
@@ -94,7 +95,7 @@ export default {
   methods: {
     _go_(obj) {
       this.$router.push(
-        `/pc/article/detail?articleId=${obj.articleId}&teacherId=${
+        `/pc/article/detail?articleId=${obj.id}&teacherId=${
           obj.user.userId
         }`
       );
@@ -105,11 +106,17 @@ export default {
         today,
         lastId
       };
-      this.$api.post(API.articleList, data).then(res => {
-        if (res.code === 200) {
+      this._netGet(API.articleList, data).then(res => {
+        if (res.code === 0) {
           this.list = res.data.splice(0, 6);
+          this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }
-      });
+      }).catch(err => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+        }, 2000)
+      })
     }
   },
   components: {

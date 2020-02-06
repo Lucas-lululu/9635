@@ -24,11 +24,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   res => {
     if (res.status === 200) {
-      if (res.data.errorCode === 101) {
-        console.log(res)
-      } else {
-        return res.data
-      }
+      return res.data
     } else {
       return {
         msg: res.statusText

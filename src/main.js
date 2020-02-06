@@ -11,7 +11,6 @@ import store from './store'
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
 import Vuecookie from 'vue-cookie'
 import API from './assets/api/request'
 import './assets/iconfont/iconfont.css'
@@ -20,9 +19,14 @@ import ParamsHandler from "./mixins/ParamsHandler";
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 Vue.use(Vuecookie)
+import layer from 'vue-layer'
+import 'vue-layer/lib/vue-layer.css';
 Vue.prototype.$cookies = Vuecookie
 // import Swiper from 'swiper';
 // import 'swiper/css/swiper.css';
+Vue.prototype.$layer = layer(Vue, {
+  msgtime: 3
+})
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })

@@ -12,7 +12,8 @@
           <p>
             <i class="el-icon-view"></i>
             {{item.watchCount}}
-            <span>{{item.startTime | formatDate}}</span>
+            <!-- <span>{{item.startTime | formatDate}}</span> -->
+            <span>{{item.startTime}}</span>
           </p>
         </div>
       </li>

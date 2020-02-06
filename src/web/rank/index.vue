@@ -81,6 +81,7 @@ export default {
           this.list = this.rank.timeRank;
         }
       }
+      console.log(this.list)
     }
   },
   watch: {
@@ -120,6 +121,7 @@ export default {
   .lists {
     padding: 0 19px 0 19px;
     background: #fff;
+    padding-right: 0px;
     .li {
       border-bottom: 1px solid #eaeaea;
       padding: 15px 0;
@@ -168,6 +170,7 @@ export default {
           white-space: nowrap;
           -ms-text-overflow: ellipsis;
           text-overflow: ellipsis;
+          text-align: left;
         }
       }
       .btn-follow {
