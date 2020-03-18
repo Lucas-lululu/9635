@@ -143,7 +143,7 @@
                 <p class="title">{{item.courseName}}</p>
                 <div class="time">
                   <p class="intorduce">{{item.introduce}}</p>
-                  <span>{{item.updateTime | formatDate}} 开课</span>
+                  <span>{{item.createDate}} 开课</span>
                 </div>
               </div>
             </li>
@@ -266,6 +266,7 @@ export default {
       this._netGet(API.courses, data).then(res => {
         if (res.code === 0) {
           this.coursesList = res.data.list;
+          console.log(this.coursesList)
           this.fullscreenLoading = false
         }
       }).catch(err => {
@@ -314,10 +315,11 @@ export default {
     },
     _getDetail_() {
       let data = {
-        roomId: this.$route.query.teacherId
+        userid: this.$route.query.teacherId
       };
       this._netGet(API.detail, data).then(res => {
-        if (res.code === 200) {
+        if (res.code = 0) {
+          console.log(res)
         }
       });
     },

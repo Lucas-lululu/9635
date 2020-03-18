@@ -47,7 +47,13 @@ export default {
     _get_Home_page_() {
       this.$api.get(API.homepage, {}).then(res => {
         if (res.code === 0) {
-          this.bannerList = res.data.banners;
+          let list = res.data.banners
+          for (let key of list) {
+            if (key.platformType === 1) {
+              this.bannerList.push(key)
+            }
+          } 
+          // this.bannerList = res.data.banners;
           this.oneList = res.data.teachers.splice(0, 10);
           this.twoList = res.data.teachers;
           this.rank = res.data.rank;

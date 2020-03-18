@@ -13,7 +13,8 @@
     <div class="web_header">
       <div class="nav-header">
         <div class="nav_log">
-          <img src="https://www.9635.com.cn/file/nav.png" alt />
+          <img src="@/assets/img/nav.png" alt />
+          <!-- <img src="https://www.9635.com.cn/file/nav.png" alt /> -->
         </div>
         <div class="nav_list">
           <ul>

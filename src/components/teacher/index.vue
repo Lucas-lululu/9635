@@ -21,7 +21,8 @@
               <span>易学教育</span>
               <div class="live-name">{{item.nikeName}}的直播间</div>
               <div class="font">
-                <span>{{item.level}}</span>
+                <span v-if="item.level">{{item.level}}</span>
+                <span v-else>0</span>
                 粉丝</div>
             </div>
             <!-- 按钮 -->
@@ -42,13 +43,13 @@
           <div class="more" @click="_router_go_('live')">更多>></div>
         </div>
         <ul class="right-list">
-          <li class="right-list-item" v-for="item in rightTeacherList" :key="item.id">
+          <li class="right-list-item" v-for="(item, index) in rightTeacherList" :key="index">
             <div class="box">
-              <span class="num">{{item.id}}.</span>
-              <span class="name">{{item.name}}</span>
+              <span class="num">{{index+1}}.</span>
+              <span class="name">{{item.nikeName}}</span>
               <span class="teacher">{{item.post}}</span>
             </div>
-            <p class="face">粉丝数：{{item.face}}</p>
+            <p class="face">粉丝数：{{item.value}}</p>
           </li>
         </ul>
       </div>

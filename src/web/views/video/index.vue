@@ -54,12 +54,13 @@ export default {
         obj.user.userId
       }`;
     },
-    _getVideo_Detail_() {
+    async _getVideo_Detail_() {
       let data = {
         lastId: 0,
         teacherId: this.$route.query.teacherId
       };
-      this.$api.post(API.video, data).then(res => {
+      
+      await this.$api.post(API.video, data).then(res => {
         if (res.code === 0) {
           for (let key in res.data.list) {
             if (res.data.list[key].id == this.$route.query.videoId) {
@@ -70,6 +71,16 @@ export default {
               this.title = res.data.list[key].title;
               this.watch = res.data.list[key].watchCount;
               this.date = res.data.list[key].time;
+            }
+             else {
+              this._netGet(API.lessDetail, {lessonId: this.$route.query.teacherId}).then(res => {
+                if (res.code === 0) {
+                  this.url = res.data.videoUrl
+                  this.title = res.data.lessonName
+                  this.watch = 0
+                  
+                }
+              })
             }
           }
           this.list = res.data.list;
@@ -83,6 +94,7 @@ export default {
     }
   },
   created() {
+    console.log('开始执行')
     this._getVideo_Detail_();
   },
   components: {

@@ -266,12 +266,13 @@ export default {
       this._netGet(API.article, data).then(res => {
         if (res.code === 0) {
           this.body = res.data;
-          this.$emit('fullscreenLoading', false)
           this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }
       }).catch(err => {
         setTimeout(() => {
           this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }, 2000)
       })
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="video" v-loading.fullscreen.lock="fullscreenLoading">
+  <div class="video">
     <div class="top">
       <span>当前位置：
         <a>首页> </a>
@@ -89,8 +89,7 @@ export default {
           id: 1,
           title: ''
         }
-      ],
-      fullscreenLoading: true
+      ]
     }
   },
   methods: {
@@ -135,12 +134,11 @@ export default {
           this.pic = this.videoList[0].videoImage
           this.body.title = this.videoList[0].title
           this.body.user = this.videoList[0].user
-          this.fullscreenLoading = false
           this.$emit('fullscreenLoading', false)
         }
       }).catch(err => {
         setTimeout(() => {
-          this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }, 2000)
       })
     }

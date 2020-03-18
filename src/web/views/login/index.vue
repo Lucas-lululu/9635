@@ -11,7 +11,8 @@
         <img src="https://www.9635.com.cn/file/log.png" alt />
       </p>
       <p class="word">
-        <img src="https://www.9635.com.cn/file/word.png" alt />
+        <!-- <img src="https://www.9635.com.cn/file/word.png" alt /> -->
+        易学商学院
       </p>
     </div>
     <div class="login_content">
@@ -70,7 +71,7 @@ export default {
       if (this.webPwd && this.webModel) {
         let data = {
           mobile: this.webModel,
-          password: this.webPwd
+          phoneNumber: this.webPwd
         }
         this.$api.post(API.login, data).then(res => {
           if (res.code === 0) {
@@ -121,6 +122,9 @@ export default {
       width: 97.5px;
       height: 22.5px;
       display: block;
+      font-size: 19px;
+      font-weight: bold;
+      color: #fff;
       padding-top: 10px;
       margin: 0 auto;
       img {

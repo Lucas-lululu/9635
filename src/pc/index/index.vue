@@ -1,5 +1,5 @@
 <template>
-  <div class="pc">
+  <div class="pc" v-loading.fullscreen.lock="fullscreenLoading">
     <!-- pc-index-轮播图 -->
     <div class="carousel_box">
       <v-swiper :bannerList="bannerList" />
@@ -27,7 +27,7 @@
             <ul class="live_list">
               <li v-for="item in live" :key="item.liveId" class="live_item">
                 <ul>
-                  <li>{{item.liveTitle}}</li>
+                  <li>{{item.title}}</li>
                   <li>{{item.startTime | formatDate}}</li>
                 </ul>
               </li>
@@ -50,156 +50,51 @@
         >
           <el-carousel-item>
             <ul class="list">
-              <li class="item">
+              <li class="item" v-for="item in carouselList1" :key="item.userId">
                 <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/fb70ca47e3fa4016a5b1c8c5a1a556b0_wechatimg12%403x.png"
-                    alt
-                  />
+                  <img :src="item.avatarUrl"/>
                 </div>
                 <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
                 <div class="int">
                   <p class="name">
-                    孙清
+                    {{item.nikeName}}
                     <span class="btn">点击关注</span>
                   </p>
-                  <p class="content">准备于20:00进行视频直播:《江氏财富之窗-涨停聚金</p>
-                </div>
-              </li>
-              <li class="item">
-                <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/d6ed1fb557a041bcb37f06fd2cedba7f_%E7%86%8A%E9%9D%92%E9%BE%99_2%403x.png"
-                    alt
-                  />
-                </div>
-                <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
-                <div class="int">
-                  <p class="name">
-                    熊艳平
-                    <span class="btn">点击关注</span>
-                  </p>
-                  <p class="content">上架了一节新视频：《20191213 跳空向上，坚守强势（盘中版）》</p>
-                </div>
-              </li>
-              <li class="item">
-                <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/79a9cad4a6bc4574aa0ba25cb684d84a_wechatimg1391%403x.png"
-                    alt
-                  />
-                </div>
-                <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
-                <div class="int">
-                  <p class="name">
-                    李克勤团队
-                    <span class="btn">点击关注</span>
-                  </p>
-                  <p class="content">上架了一节新视频：《20191225 线上教学倒数第3天》</p>
+                  <p class="content">{{item.msg}}</p>
                 </div>
               </li>
             </ul>
           </el-carousel-item>
           <el-carousel-item>
             <ul class="list">
-              <li class="item">
+              <li class="item" v-for="item in carouselList2" :key="item.userId">
                 <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/d6ed1fb557a041bcb37f06fd2cedba7f_%E7%86%8A%E9%9D%92%E9%BE%99_2%403x.png"
-                    alt
-                  />
+                  <img :src="item.avatarUrl"/>
                 </div>
                 <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
                 <div class="int">
                   <p class="name">
-                    熊艳平
+                    {{item.nikeName}}
                     <span class="btn">点击关注</span>
                   </p>
-                  <p class="content">上架了一节新视频：《20191213 跳空向上，坚守强势（盘中版）》</p>
-                </div>
-              </li>
-              <li class="item">
-                <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/fb70ca47e3fa4016a5b1c8c5a1a556b0_wechatimg12%403x.png"
-                    alt
-                  />
-                </div>
-                <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
-                <div class="int">
-                  <p class="name">
-                    孙清
-                    <span class="btn">点击关注</span>
-                  </p>
-                  <p class="content">准备于20:00进行视频直播:《江氏财富之窗-涨停聚金</p>
-                </div>
-              </li>
-              <li class="item">
-                <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/79a9cad4a6bc4574aa0ba25cb684d84a_wechatimg1391%403x.png"
-                    alt
-                  />
-                </div>
-                <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
-                <div class="int">
-                  <p class="name">
-                    李克勤团队
-                    <span class="btn">点击关注</span>
-                  </p>
-                  <p class="content">上架了一节新视频：《20191225 线上教学倒数第3天》</p>
+                  <p class="content">{{item.msg}}</p>
                 </div>
               </li>
             </ul>
           </el-carousel-item>
           <el-carousel-item>
             <ul class="list">
-              <li class="item">
+              <li class="item" v-for="item in carouselList3" :key="item.userId">
                 <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/79a9cad4a6bc4574aa0ba25cb684d84a_wechatimg1391%403x.png"
-                    alt
-                  />
+                  <img :src="item.avatarUrl"/>
                 </div>
                 <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
                 <div class="int">
                   <p class="name">
-                    李克勤团队
+                    {{item.nikeName}}
                     <span class="btn">点击关注</span>
                   </p>
-                  <p class="content">上架了一节新视频：《20191225 线上教学倒数第3天》</p>
-                </div>
-              </li>
-              <li class="item">
-                <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/fb70ca47e3fa4016a5b1c8c5a1a556b0_wechatimg12%403x.png"
-                    alt
-                  />
-                </div>
-                <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
-                <div class="int">
-                  <p class="name">
-                    孙清
-                    <span class="btn">点击关注</span>
-                  </p>
-                  <p class="content">准备于20:00进行视频直播:《江氏财富之窗-涨停聚金</p>
-                </div>
-              </li>
-              <li class="item">
-                <div class="img">
-                  <img
-                    src="https://images-test.integrity.com.cn/d6ed1fb557a041bcb37f06fd2cedba7f_%E7%86%8A%E9%9D%92%E9%BE%99_2%403x.png"
-                    alt
-                  />
-                </div>
-                <img class="hot" src="https://www.9635.com.cn/file/hight.gif" alt />
-                <div class="int">
-                  <p class="name">
-                    熊艳平
-                    <span class="btn">点击关注</span>
-                  </p>
-                  <p class="content">上架了一节新视频：《20191213 跳空向上，坚守强势（盘中版）》</p>
+                  <p class="content">{{item.msg}}</p>
                 </div>
               </li>
             </ul>
@@ -217,10 +112,10 @@
           <li v-for="item in faceTofaceList" :key="item.id" class="faceItem">
             <ul>
               <li>
-                <img :src="item.img" />
+                <img :src="item.avatarUrl" />
               </li>
-              <li class="name">{{item.name}}</li>
-              <li class="name">{{item.title}}</li>
+              <li class="name">{{item.nikeName}}</li>
+              <li class="name">{{item.username}}</li>
             </ul>
           </li>
         </ul>
@@ -278,14 +173,14 @@
             <li
               class="right-list-item"
               style="justify-content: start"
-              v-for="item in videoRightList"
-              :key="item.id"
+              v-for="(item,index) in videoRightList"
+              :key="index"
             >
               <div class="video-right-i">
-                <span class="num else" v-if="item.id < 4">{{item.id}}</span>
-                <span class="num" v-else>{{item.id}}</span>
+                <span class="num else" v-if="index+1 < 4">{{index+1}}</span>
+                <span class="num" v-else>{{index+1}}</span>
               </div>
-              <div class="video-right-title">{{item.title}}</div>
+              <div class="video-right-title">{{item.msg}}</div>
             </li>
           </ul>
         </div>
@@ -334,14 +229,14 @@
             <li
               class="right-list-item"
               style="justify-content: start"
-              v-for="item in courseRightList"
-              :key="item.id"
+              v-for="(item,index) in courseRightList"
+              :key="index"
             >
               <div class="video-right-i">
-                <span class="num else" v-if="item.id < 4">{{item.id}}</span>
-                <span class="num" v-else>{{item.id}}</span>
+                <span class="num else" v-if="index+1 < 4">{{index+1}}</span>
+                <span class="num" v-else>{{index+1}}</span>
               </div>
-              <div class="video-right-title">{{item.title}}</div>
+              <div class="video-right-title">{{item.msg}}</div>
             </li>
           </ul>
         </div>
@@ -376,53 +271,11 @@ import Teacher from "@/components/teacher";
 export default {
   data() {
     return {
-      bannerList: [
-        {
-          bannerId: 1,
-          imageUrl:
-            "https://images-test.integrity.com.cn/36aac539b57d4089b21465500f85bc87_8ee83bd42dcc4c21b8bdea8e01141597_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191018172415.jpg"
-        },
-        {
-          bannerId: 2,
-          imageUrl:
-            "https://images-test.integrity.com.cn/38bf7484fe524c81acaa50c4b10bdf33_%E8%B4%A2%E5%AF%8C%E6%80%BB%E8%A3%81%E7%8F%AD2%E6%9C%9Fbanner%E7%94%B5%E8%84%91%E7%89%88.jpg"
-        },
-        {
-          bannerId: 3,
-          imageUrl:
-            "https://images-test.integrity.com.cn/3dbca86e3e0a40cc81f5ee600dd56524_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191128095346.jpg"
-        },
-        {
-          bannerId: 4,
-          imageUrl:
-            "https://images-test.integrity.com.cn/2bc6d189e449486a9b60121a575842c3_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191224142324.jpg"
-        },
-        {
-          bannerId: 5,
-          imageUrl:
-            "https://images-test.integrity.com.cn/c36a0531898446b384f32a6701df0612_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191225143427.jpg"
-        },
-        {
-          bannerId: 6,
-          imageUrl:
-            "https://images-test.integrity.com.cn/7456431a29f44c038dd092c3383c53f7_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191212154043.jpg"
-        },
-        {
-          bannerId: 7,
-          imageUrl:
-            "https://images-test.integrity.com.cn/14d0bcad893c4830980d6c36b7d47a16_22b31ca47c704bd38d7934d014fcc105_PCbanner.png"
-        },
-        {
-          bannerId: 8,
-          imageUrl:
-            "https://images-test.integrity.com.cn/a6df4edef30e435984a214a8fff0639b_%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191101155812.jpg"
-        },
-        {
-          bannerId: 9,
-          imageUrl:
-            "https://images-test.integrity.com.cn/3f8d5b54f9034bfe88237d08bf3e833e_434878aa45934262b2c48055bae2f9b.jpg"
-        }
-      ],
+      fullscreenLoading: true,
+      bannerList: [],
+      carouselList1: [],
+      carouselList2: [],
+      carouselList3: [],
       nav_list: [
         {
           id: 1,
@@ -474,111 +327,9 @@ export default {
       live_list: [], //
       live: [], // 直播列表
       liveImg: "", // 直播图片
-      faceTofaceList: [
-        {
-          id: 1,
-          img:
-            "https://images-test.integrity.com.cn/475d32646aa447748b3d900f114ab734_sunqing.png",
-          name: "孙清",
-          title: "易学教育高端操盘手"
-        },
-        {
-          id: 2,
-          img:
-            "https://images-test.integrity.com.cn/0eef204105e84e6bbb5343f69e988f0b_bianfengwei.png",
-          name: "边风炜",
-          title: "易学教育高端操盘手"
-        },
-        {
-          id: 3,
-          img:
-            "https://images-test.integrity.com.cn/ce23217ca7ae4d60a114040b426c40e3_kaiensi.png",
-          name: "吕长顺",
-          title: "易学教育高端操盘手"
-        },
-        {
-          id: 4,
-          img:
-            "https://images-test.integrity.com.cn/26e0f431e5294aae943489b2c4ac6a7b_xuwenming.png",
-          name: "徐文明团队",
-          title: "易学教育高端操盘手"
-        },
-        {
-          id: 5,
-          img:
-            "https://images-test.integrity.com.cn/75a6bede95fb46f3aded97ebe4d326d0_weininghai.png",
-          name: "魏宁海",
-          title: "易学教育高端操盘手"
-        }
-      ], // 大V面对面
-      leftTeacherList: [
-        {
-          id: 1,
-          name: "孙清",
-          img:
-            "https://images-test.integrity.com.cn/fb70ca47e3fa4016a5b1c8c5a1a556b0_wechatimg12%403x.png",
-          face: 11566
-        },
-        {
-          id: 2,
-          name: "徐文明团队",
-          img:
-            "https://images-test.integrity.com.cn/3374e8233e3247c183e01af055eecf00_%E5%BE%90%E6%96%87%E6%98%8E%403x.png",
-          face: 9583
-        },
-        {
-          id: 3,
-          name: "魏宁海",
-          img:
-            "https://images-test.integrity.com.cn/bf50f527f45d4d30b8ef4da06a7d5f55_%E9%AD%8F%E8%80%81%E5%B8%88%E6%96%B0%403x.png",
-          face: 8708
-        },
-        {
-          id: 4,
-          name: "边风炜",
-          img:
-            "https://images-test.integrity.com.cn/d3f5a037c866483fb10f0563cf472bfd_wechatimg31%403x.png",
-          face: 7395
-        }
-      ], // 左边列表
-      rightTeacherList: [
-        {
-          id: 1,
-          name: "孙清",
-          post: "院长",
-          face: 11568
-        },
-        {
-          id: 2,
-          name: "徐文明团队",
-          post: "院长",
-          face: 9584
-        },
-        {
-          id: 3,
-          name: "魏宁海",
-          post: "院长",
-          face: 8710
-        },
-        {
-          id: 4,
-          name: "边风炜",
-          post: "院长",
-          face: 7397
-        },
-        {
-          id: 5,
-          name: "吴俊琛",
-          post: "讲师",
-          face: 6628
-        },
-        {
-          id: 6,
-          name: "吕长顺",
-          post: "院长",
-          face: 6137
-        }
-      ],
+      faceTofaceList: [], // 大V面对面
+      leftTeacherList: [], // 左边列表
+      rightTeacherList: [],
       videoList: [
         {
           id: 1,
@@ -635,48 +386,7 @@ export default {
           time: " 19-12-25 19:54"
         }
       ], //视频精选
-      videoRightList: [
-        {
-          id: 1,
-          title: "20191211 芳芳老师交易系统定位"
-        },
-        {
-          id: 2,
-          title: "寻找大牛股回踩确认后的绝佳上车机会"
-        },
-        {
-          id: 3,
-          title: "周二（1210）盘后分享-上涨运行结构应对"
-        },
-        {
-          id: 4,
-          title: "2轮B浪反弹结构未变"
-        },
-        {
-          id: 5,
-          title: "上涨过程中的量价关系"
-        },
-        {
-          id: 6,
-          title: "反包后的结构变化"
-        },
-        {
-          id: 7,
-          title: "20191218 高位震荡，回踩皆为大机会"
-        },
-        {
-          id: 8,
-          title: "跨年时间窗口开启"
-        },
-        {
-          id: 9,
-          title: "20191218 滚动低吸，切莫追涨（盘中版）"
-        },
-        {
-          id: 10,
-          title: "大金融带动持续放量，缩量回踩皆机会"
-        }
-      ],
+      videoRightList: [],
       courseList: [
         {
           id: 1,
@@ -737,48 +447,7 @@ export default {
           watch: "1923"
         }
       ], //课程列表
-      courseRightList: [
-        {
-          id: 1,
-          title: "《手把手教你用研报》一年期"
-        },
-        {
-          id: 2,
-          title: "操盘特训班"
-        },
-        {
-          id: 3,
-          title: "富豪班VIP课堂"
-        },
-        {
-          id: 4,
-          title: "量价狙击实战班"
-        },
-        {
-          id: 5,
-          title: "财富总裁班"
-        },
-        {
-          id: 6,
-          title: "赢在起跑线-手把手教您价值掘金"
-        },
-        {
-          id: 7,
-          title: "利用盘中六论 轻松抓涨停板"
-        },
-        {
-          id: 8,
-          title: "2019下半年医疗与科技行业报告会"
-        },
-        {
-          id: 9,
-          title: "【公开课】波段结构学"
-        },
-        {
-          id: 10,
-          title: "江氏弟子班VIP视频"
-        }
-      ],
+      courseRightList: [],
       logList: [
         {
           id: 1,
@@ -863,22 +532,24 @@ export default {
       this.classId = id;
       if (this.classId == 1) {
         for (const key of this.live_list) {
-          if (!key.living) {
-            this.live.push(key);
-          }
-        }
-      } else if (this.classId == 2) {
-        for (const key of this.live_list) {
-          if (key.living) {
+          if (key.living === this.classId) {
             this.live.push(key);
           }
         }
       }
+      //  else if (this.classId == 2) {
+      //   for (const key of this.live_list) {
+      //     if (key.living === 2) {
+      //       this.live.push(key);
+      //     }
+      //   }
+      // }
     },
     _get_Home_page_() {
       this.$api.get(API.homepage, {}).then(res => {
         if (res.code === 0) {
-          this.live_list = res.data.lives;
+          let data = res.data
+          this.live_list = data.lives;
           let list = [];
           this._change_live_(1);
           for (const key of this.live_list) {
@@ -892,14 +563,33 @@ export default {
           } else {
             this.liveImg = list[0].imageUrl;
           }
-          this.leftTeacherList = res.data.teachers.splice(0, 4);
-          this.oneList = res.data.teachers.splice(0, 10);
-          this.twoList = res.data.teachers;
-          this.rank = res.data.rank;
-          this.news = res.data.information;
+          this.leftTeacherList = data.teachers.slice(0, 4);
+          this.oneList = data.teachers.slice(0, 10);
+          this.twoList = data.teachers;
+          this.rank = data.rank;
+          this.faceTofaceList = data.teachers.slice(0, 5)
+          this.carouselList1 = data.rank.hotRank.slice(0, 3)
+          this.carouselList2 = data.rank.hotRank.slice(3, 6)
+          this.carouselList3 = data.rank.hotRank.slice(6, 9)
+          this.rightTeacherList = data.rank.hotRank.slice(0, 6)
+          this.videoRightList = data.rank.timeRank
+          this.courseRightList = data.rank.fansRank
+          for (let key of data.banners) {
+            if (key.platformType === 0) {
+              this.bannerList.push(key)
+            }
+          }
+          // platformType 0 移动端  1 pc端
+          this.news = data.information;
+          this.fullscreenLoading = false
           this.$emit('fullscreenLoading', false)
         }
-      });
+      }).catch(() => {
+        setTimeout(() => {
+          this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
+        }, 2000)
+      })
     }
   },
   created() {
@@ -937,8 +627,11 @@ export default {
         background: #007aff !important;
       }
       .swiper-wrapper {
+        .swiper-slide {
+          text-align: center;
+        }
         img {
-          width: 100%;
+          // width: 100%;
           height: 100%;
         }
       }
@@ -1221,6 +914,10 @@ export default {
               line-height: 20px;
             }
             li {
+              > img {
+                width: 100%;
+                height: 100%;
+              }
               cursor: pointer;
               &:first-child {
                 margin: 0;

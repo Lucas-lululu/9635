@@ -11,7 +11,8 @@
         <img src="https://www.9635.com.cn/file/log.png" alt />
       </p>
       <p class="word">
-        <img src="https://www.9635.com.cn/file/word.png" alt />
+        <!-- <img src="https://www.9635.com.cn/file/word.png" alt /> -->
+                易学商学院
       </p>
     </div>
     <div class="login_content">
@@ -136,6 +137,9 @@ export default {
     .word {
       width: 97.5px;
       height: 22.5px;
+      font-weight: bold;
+      font-size: 19px;
+      color: #fff;
       display: block;
       padding-top: 10px;
       margin: 0 auto;

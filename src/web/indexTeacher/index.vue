@@ -11,7 +11,7 @@
       </swiper-slide>
       <swiper-slide>
         <ul>
-          <li @click="_go_(item.userId)" class="item" v-for="item in twoList" :key="item.userId">
+          <li @click="_go_(item)" class="item" v-for="item in twoList" :key="item.userId">
             <img :src="item.avatarUrl" alt />
             <p>{{item.nikeName}}</p>
           </li>

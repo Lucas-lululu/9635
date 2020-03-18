@@ -16,7 +16,7 @@ export const Course = {
 
 export const Teacher = {
   list: `${PATH_HEAD}/api/finance/rank/list`,
-  video: `${API_HEAD}/teacher/videos`
+  video: `${API_HEAD}/api/finance/teacher/videos`
 }
 
 export const Detail = {
@@ -27,7 +27,8 @@ export const Detail = {
   courses: `${PATH_HEAD}/api/finance/teacher/courses`,
   article: `${PATH_HEAD}/api/finance/article/detail`,
   videoDetail: `${PATH_HEAD}/api/finance/article/videoDetail`,
-  courseDetail: `${PATH_HEAD}/api/finance/course/detail`
+  courseDetail: `${PATH_HEAD}/api/finance/course/detail`,
+  lessDetail: `${PATH_HEAD}/api/finance/course/lessonDetail`
 }
 
 export const List = {

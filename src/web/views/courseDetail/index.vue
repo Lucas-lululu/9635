@@ -58,7 +58,7 @@
                 <span>课程目录</span>
             </div>
             <ul class="list">
-                <li class="item" v-for="(item, index) in lessList" :key="index">
+                <li class="item" v-for="(item, index) in lessList" :key="index" @click="_go_video_(item)">
                     <span>{{index + 1}}.</span>
                     <span>{{item.lessonName}}</span>
                 </li>
@@ -137,6 +137,11 @@ export default {
         }
     },
     methods: {
+        // 目录跳转到视频
+        _go_video_(obj) {
+            console.log(obj.id)
+            this.$router.push(`/web/video/detail?videoId=${obj.courseId}&teacherId=${obj.id}`)
+        },
         // 获取详情内容
         _getLiveDetail_() {
             let data = {
@@ -176,7 +181,7 @@ export default {
             let data = {
                 courseId: this.Id
             }
-            this.$api.get(API.List.courseCommentList, data).then(res => {
+            this._netGet(API.List.courseCommentList, data).then(res => {
                 if (res.code === 0) {
                 //    this.commentList = res.data
                    console.log('评论')

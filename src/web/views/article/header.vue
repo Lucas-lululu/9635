@@ -1,11 +1,12 @@
 <template>
   <div class="header">
     <a class="icon">
-      <img src="https://www.9635.com.cn/images/download/icon-hao.png" alt />
+      <img src="@/assets/img/nav.png" alt />
+      <!-- <img src="https://www.9635.com.cn/images/download/icon-hao.png" alt /> -->
     </a>
-    <a class="text">
+    <!-- <a class="text">
       <img src="https://www.9635.com.cn/images/download/hrhg_text.png" alt />
-    </a>
+    </a> -->
     <!-- <a class="des">好好学习·天天向上</a> -->
     <a class="app">打开App</a>
   </div>
@@ -25,7 +26,7 @@ export default {};
     float: left;
   }
   .icon {
-    width: 38px;
+    width: 178px;
     line-height: 76px;
     margin-left: 10px;
     img {
@@ -61,4 +62,5 @@ export default {};
     font-weight: 600;
   }
 }
+</style>
 </style>

@@ -115,6 +115,7 @@ export default {
       }).catch(err => {
         setTimeout(() => {
           this.fullscreenLoading = false
+          this.$emit('fullscreenLoading', false)
         }, 2000)
       })
     }
