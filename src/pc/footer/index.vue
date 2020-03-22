@@ -1,13 +1,13 @@
 <template>
   <div class="bottom_all">
     <div class="bottom-main">
-      <div class="title">经营证券期货业务许可证 统一社会信用代码（境外机构编号）：911102281029993028</div>
+      <div class="title"></div>
       <div class="content">
         <div class="left">
           <p>客服电话：021-50206163</p>
           <p>邮箱：service@integrity.com.cn</p>
           <p>公司地址：上海市浦东新区东方路1267弄8号（陆家嘴金融服务广场二期）10层</p>
-          <p>备案/许可证编号：沪ICP备17018916号-2</p>
+          <p>备案/许可证编号：粤ICP备20014440号</p>
         </div>
         <div class="right">
           <div class="log">

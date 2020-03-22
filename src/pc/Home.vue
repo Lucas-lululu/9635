@@ -3,7 +3,7 @@
     <!-- pc-顶部横条 -->
     <div class="nav-top">
       <div>
-        <span>经营证券期货业务许可证 统一社会信用代码（境外机构编号）：911102281029993028</span>
+        <span></span>
         <a class="shxxLoginPopUp">登录</a>
         <a class="shxxLoginPopUp">注册</a>
         <span class="cus_service">客服电话:021-50206163</span>
