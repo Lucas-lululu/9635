@@ -11,12 +11,12 @@
         </div>
         <div class="right">
           <div class="log">
-            <img src="@/assets/img/code.png" alt />
+            <img src="@/assets/img/APP.png" alt />
             <p>让投资因学习而确定</p>
             <p>扫描二维码下载易学教育APP</p>
           </div>
           <div class="code">
-            <img src="@/assets/img/code.png" alt />
+            <img src="@/assets/img/GZH.png" alt />
             <p>微信扫一扫</p>
             <p>关注「易学教育」公众号</p>
           </div>

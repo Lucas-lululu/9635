@@ -605,7 +605,9 @@ export default {
 <style lang="less">
 .pc {
   .carousel_box {
-    height: 337px;
+    width: 95%;
+    // height: 337px;
+    margin: 0 auto;
     .swiper-container {
       width: 100%;
       height: 100%;
@@ -631,8 +633,8 @@ export default {
           text-align: center;
         }
         img {
-          // width: 100%;
-          height: 100%;
+          width: 100%;
+          // height: 100%;
         }
       }
       .swiper-pagination {
